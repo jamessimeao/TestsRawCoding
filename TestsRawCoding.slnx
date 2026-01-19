@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="Mocking/Mocking.csproj" Id="28b4a1cf-ecb2-4c30-ac7a-426bb137ee66" />
   <Project Path="Basics/Basics.csproj" Id="af9d2a7a-877f-440c-8b70-332a25e41b2e" />
 </Solution>
