@@ -21,7 +21,9 @@ namespace UnitTesting1.Tests
             // assert
             TodoItem savedItem = Assert.Single(list.All);
             Assert.NotNull(savedItem);
+            Assert.Equal(1, savedItem.Id);
             Assert.Equal(content, savedItem.Content);
+            Assert.False(savedItem.Complete);
         }
 
         [Fact]
