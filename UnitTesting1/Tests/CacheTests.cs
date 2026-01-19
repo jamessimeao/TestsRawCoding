@@ -31,5 +31,14 @@ namespace UnitTesting1.Tests
             bool contains = cache.Contains("url");
             Assert.False(contains);
         }
+        
+        [Fact]
+        public void Contains_ReturnsFalse_WhenDoesntContainItem()
+        {
+            Cache cache = new Cache(TimeSpan.FromDays(1));
+
+            bool contains = cache.Contains("url");
+            Assert.False(contains);
+        }
     }
 }
