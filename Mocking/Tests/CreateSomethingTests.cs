@@ -15,6 +15,17 @@ namespace Mocking.Tests
             }
         }
 
+        [Fact]
+        public void CreateSomethingResult_NotSuccessful_WhenInvalidSomething()
+        {
+            var storeMock = new StoreMock();
+            CreateSomething createSomething = new(storeMock);
+
+            var createSomethingResult = createSomething.Create(null);
+
+            Assert.False(createSomethingResult.Success);
+            Assert.Equal(0, storeMock.SaveAttempts);
+        }
 
     }
 }
