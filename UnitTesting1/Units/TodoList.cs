@@ -25,7 +25,6 @@
 
             TodoItem completedItem = item with
             {
-                Id = idCounter++,
                 Complete = true
             };
             _todoItems.Add(completedItem);
