@@ -23,5 +23,21 @@ namespace UnitTesting1.Tests
             Assert.NotNull(savedItem);
             Assert.Equal(content, savedItem.Content);
         }
+
+        [Fact]
+        public void TodoItemIncrementsEveryTimeWeAdd()
+        {
+            // arrange
+            var list = new TodoList();
+
+            // act
+            list.Add(new TodoItem("Test 1"));
+            list.Add(new TodoItem("Test 2"));
+
+            //assert
+            TodoItem[] items = list.All.ToArray();
+            Assert.Equal(1, items[0].Id);
+            Assert.Equal(2, items[1].Id);
+        }
     }
 }
