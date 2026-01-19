@@ -39,5 +39,22 @@ namespace UnitTesting1.Tests
             Assert.Equal(1, items[0].Id);
             Assert.Equal(2, items[1].Id);
         }
+
+        [Fact]
+        public void Complete_SetsTodoItemCompleteFlagToTrue()
+        {
+            // arrange
+            TodoList list = new TodoList();
+            list.Add(new TodoItem("Test 1"));
+
+            // act
+            list.Complete(1);
+
+            // assert
+            TodoItem completedItem = Assert.Single(list.All);
+            Assert.NotNull(completedItem);
+            Assert.Equal(1, completedItem.Id);
+            Assert.True(completedItem.Complete);
+        }
     }
 }
