@@ -1,4 +1,5 @@
 ﻿using Mocking.Units;
+using Moq;
 
 namespace Mocking.Tests
 {
@@ -18,6 +19,8 @@ namespace Mocking.Tests
                 return SaveResult;
             }
         }
+
+        public readonly Mock<CreateSomething.IStore> _storeMock = new();
 
         [Fact]
         public void DoesntSaveToDatabaseWhenInvalidSomething()
