@@ -6,6 +6,7 @@ namespace Mocking.Tests
 {
     public class CreateSomethingTests
     {
+        /*
         public class StoreMock : CreateSomething.IStore
         {
             public int SaveAttempts { get; set; }
@@ -20,6 +21,7 @@ namespace Mocking.Tests
                 return SaveResult;
             }
         }
+        */
 
         public readonly Mock<CreateSomething.IStore> _storeMock = new();
 
