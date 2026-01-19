@@ -1,5 +1,6 @@
 ﻿using Mocking.Units;
 using Moq;
+using static Mocking.Tests.CreateSomethingTests;
 
 namespace Mocking.Tests
 {
@@ -25,28 +26,30 @@ namespace Mocking.Tests
         [Fact]
         public void DoesntSaveToDatabaseWhenInvalidSomething()
         {
-            var storeMock = new StoreMock();
-            CreateSomething createSomething = new(storeMock);
+            CreateSomething createSomething = new(_storeMock.Object);
 
             var createSomethingResult = createSomething.Create(null);
 
             Assert.False(createSomethingResult.Success);
-            Assert.Equal(0, storeMock.SaveAttempts);
+            _storeMock.Verify(
+                x => x.Save
+                (
+                    It.IsAny<CreateSomething.Something>()),
+                    Times.Never
+                );
         }
 
         [Fact]
         public void SaveSomethingToDatabaseWhenValid()
         {
-            var storeMock = new StoreMock();
-            storeMock.SaveResult = true;
-            CreateSomething createSomething = new(storeMock);
-
             var something = new CreateSomething.Something { Name = "Foo" };
+            CreateSomething createSomething = new(_storeMock.Object);
+            _storeMock.Setup(x => x.Save(something)).Returns(true);
+
             var createSomethingResult = createSomething.Create(something);
 
             Assert.True(createSomethingResult.Success);
-            Assert.Equal(1, storeMock.SaveAttempts);
-            Assert.Equal(something, storeMock.LastSavedSomething);
+            _storeMock.Verify(x => x.Save(something), Times.Once);
         }
     }
 }
