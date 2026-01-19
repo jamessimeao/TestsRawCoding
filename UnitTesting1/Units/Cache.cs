@@ -20,7 +20,7 @@ namespace UnitTesting1.Units
         {
             if(_cache.TryGetValue(url, out Item? item))
             {
-                return DateTime.UtcNow.Subtract(item.LastCollected) > _cacheTime;
+                return DateTime.UtcNow.Subtract(item.LastCollected) < _cacheTime;
             }
 
             return false;
