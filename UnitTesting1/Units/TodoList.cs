@@ -13,7 +13,7 @@
 
         public void Add(TodoItem item)
         {
-            _todoItems.Add(item);
+            _todoItems.Add(item with { Id = idCounter++});
         }
 
         public IEnumerable<TodoItem> All => _todoItems;
