@@ -15,5 +15,21 @@ namespace UnitTesting1.Tests
 
             Assert.True(contains);
         }
+
+        [Fact]
+        public void BustsItemOutsideTimeSpan()
+        {
+            var cache = new Cache(TimeSpan.FromDays(1));
+
+            cache.Add(
+                new(
+                    "url",
+                    "content",
+                    DateTime.Now.AddDays(-2))
+                );
+
+            bool contains = cache.Contains("url");
+            Assert.False(contains);
+        }
     }
 }
