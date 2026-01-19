@@ -16,7 +16,7 @@ namespace Mocking.Tests
         }
 
         [Fact]
-        public void CreateSomethingResult_NotSuccessful_WhenInvalidSomething()
+        public void DoesntSaveToDatabaseWhenInvalidSomething()
         {
             var storeMock = new StoreMock();
             CreateSomething createSomething = new(storeMock);
