@@ -17,7 +17,7 @@ namespace UnitTesting1.Tests
         }
 
         [Fact]
-        public void BustsItemOutsideTimeSpan()
+        public void Contains_ReturnsFalse_WhenOutsideTimeSpan()
         {
             var cache = new Cache(TimeSpan.FromDays(1));
 
