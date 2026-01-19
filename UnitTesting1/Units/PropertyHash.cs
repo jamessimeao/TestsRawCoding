@@ -1,0 +1,44 @@
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace UnitTesting1.Units
+{
+    public class PropertyHash
+    {
+        public virtual string Hash<T>(T input, params Func<T, string>[] selectors)
+        {
+            StringBuilder builder = new();
+            foreach(var selector in selectors)
+            {
+                builder.Append(selector(input));
+            }
+
+            return builder.ToString();
+        }
+    }
+
+    public class AlgorithmPropertyHash : PropertyHash, IDisposable
+    {
+        private readonly HashAlgorithm _algorithm;
+
+
+        public AlgorithmPropertyHash(string algorithm)
+        {
+            // HashAlgorithm.Create is obselete, but this is a testing tutorial, so it doesn't matter.
+            _algorithm = HashAlgorithm.Create(algorithm) ?? throw new ArgumentException(algorithm);
+        }
+
+        public override string Hash<T>(T input, params Func<T, string>[] selectors)
+        {
+            string seed = base.Hash(input, selectors);
+            byte[] seedBytes = Encoding.UTF8.GetBytes(seed);
+            byte[] hashBytes = _algorithm.ComputeHash(seedBytes);
+            return Encoding.UTF8.GetString(hashBytes);
+        }
+
+        public void Dispose()
+        {
+            _algorithm.Dispose();
+        }
+    }
+}
