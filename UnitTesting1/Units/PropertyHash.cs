@@ -33,7 +33,7 @@ namespace UnitTesting1.Units
             string seed = base.Hash(input, selectors);
             byte[] seedBytes = Encoding.UTF8.GetBytes(seed);
             byte[] hashBytes = _algorithm.ComputeHash(seedBytes);
-            return Encoding.UTF8.GetString(hashBytes);
+            return Convert.ToBase64String(hashBytes);
         }
 
         public void Dispose()
