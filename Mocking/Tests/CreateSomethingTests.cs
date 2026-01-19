@@ -31,5 +31,19 @@ namespace Mocking.Tests
             Assert.Equal(0, storeMock.SaveAttempts);
         }
 
+        [Fact]
+        public void SaveSomethingToDatabaseWhenValid()
+        {
+            var storeMock = new StoreMock();
+            storeMock.SaveResult = true;
+            CreateSomething createSomething = new(storeMock);
+
+            var something = new CreateSomething.Something { Name = "Foo" };
+            var createSomethingResult = createSomething.Create(something);
+
+            Assert.True(createSomethingResult.Success);
+            Assert.Equal(1, storeMock.SaveAttempts);
+            Assert.Equal(something, storeMock.LastSavedSomething);
+        }
     }
 }
